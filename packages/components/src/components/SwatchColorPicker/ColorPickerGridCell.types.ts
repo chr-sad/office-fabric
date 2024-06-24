@@ -137,6 +137,11 @@ export interface IColorCellProps {
    * Index for this option
    */
   index?: number
+
+  /**
+   * Determines if this individual cell is disabled
+   */
+  disabled?: boolean;
 }
 
 /**

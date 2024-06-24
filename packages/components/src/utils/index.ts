@@ -23,3 +23,5 @@ export * from './DraggableZone'
 export * from './keytips'
 
 export * from './warnMutuallyExclusive'
+
+export * from './FocusZone'
