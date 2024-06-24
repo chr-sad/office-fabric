@@ -1,6 +1,6 @@
 import { classNamesFunction, getId } from '@fluentui-vue/utilities'
 import type { PropType } from 'vue'
-import { computed, defineComponent, getCurrentInstance, h, ref, toRefs, watch } from 'vue'
+import { computed, defineComponent, h, ref, toRefs, watch } from 'vue'
 import { Icon } from '../Icon'
 import { Label } from '../Label'
 import type { ICheckboxStyleProps, ICheckboxStyles } from './Checkbox.types'

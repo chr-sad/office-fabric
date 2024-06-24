@@ -1,6 +1,11 @@
 {
   "name": "office-ui-fabric-vue",
+  "type": "module",
   "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
   "workspaces": [
     "packages/utilities",
     "packages/style-utilities",
