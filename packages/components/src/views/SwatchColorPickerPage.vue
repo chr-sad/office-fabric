@@ -19,7 +19,9 @@ const baseId = 'colorpicker'
     <h2>Usage</h2>
 
     <h3>Simple SwatchColorPicker</h3>
-    <SwatchColorPicker :column-count="5" cell-shape="circle" :color-cells="colorCellsExample1" />
+    <SwatchColorPicker :should-focus-circular-navigate="true" :column-count="3" cell-shape="circle" :color-cells="colorCellsExample1" selectedId="c" @change="(ev, selectedIndex, color) => {
+      console.log('change', ev, selectedIndex, color)
+    }" />
     <SwatchColorPicker :column-count="5" cell-shape="square" :color-cells="colorCellsExample1" />
     <SwatchColorPicker :column-count="5" cell-shape="square" :color-cells="colorCellsExample1" :cell-height="35" :cell-width="35" />
 

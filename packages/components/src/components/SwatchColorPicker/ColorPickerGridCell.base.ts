@@ -1,7 +1,7 @@
 import { classNamesFunction, memoizeFunction } from '@fluentui-vue/utilities'
 import type { ITheme } from '@fluentui-vue/theme'
 import { mergeStyleSets } from '@fluentui/merge-styles'
-import { computed, defineComponent, h, toRefs } from 'vue'
+import { computed, defineComponent, h, toRefs, type PropType } from 'vue'
 import type { IButtonClassNames } from '../Button/BaseButton.classNames'
 import { getStyles as getActionButtonStyles } from '../Button/ActionButton/ActionButton.styles'
 import type { IColorCellProps, IColorPickerGridCellStyleProps, IColorPickerGridCellStyles } from './ColorPickerGridCell.types'
@@ -67,22 +67,35 @@ export const ColorPickerGridCellBase = defineComponent({
   props: {
     ...makeStylingProps(),
 
-    disabled: { type: Boolean, default: false },
+    label: { type: String, default: undefined },
+    item: { type: Object as PropType<IColorCellProps>, default: undefined },
+
+    isRadio: { type: Boolean, default: undefined },
     selected: { type: Boolean, default: false },
-    circle: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
+    circle: { type: Boolean, default: true },
+    color: { type: String, default: undefined },
+
+    onClick: { type: Function as PropType<(ev: MouseEvent, item: IColorCellProps | undefined) => void>, default: undefined },
+    onHover: { type: Function as PropType<(ev: MouseEvent, item: IColorCellProps | undefined) => void>, default: undefined },
+    onFocus: { type: Function as PropType<(ev: FocusEvent, item: IColorCellProps | undefined) => void>, default: undefined },
+
+    onMouseEnter: { type: Function as PropType<(ev: MouseEvent, item: IColorCellProps | undefined) => void>, default: undefined },
+    onMouseMove: { type: Function as PropType<(ev: MouseEvent, item: IColorCellProps | undefined) => void>, default: undefined },
+    onMouseLeave: { type: Function as PropType<(ev: MouseEvent, item: IColorCellProps | undefined) => void>, default: undefined },
+    onWheel: { type: Function as PropType<(ev: MouseEvent, item: IColorCellProps | undefined) => void>, default: undefined },
+    onKeyDown: { type: Function as PropType<(ev: KeyboardEvent, item: IColorCellProps | undefined) => void>, default: undefined },
+
     height: { type: Number, default: undefined },
     width: { type: Number, default: undefined },
     borderWidth: { type: Number, default: undefined },
-
-    color: { type: String, default: undefined },
-    label: { type: String, default: undefined },
-    item: { type: Object, default: undefined },
   },
 
   setup(props, { attrs, emit, slots }) {
     const {
       styles,
       theme,
+      isRadio,
       disabled,
       selected,
       circle,
@@ -119,6 +132,17 @@ export const ColorPickerGridCellBase = defineComponent({
       ])
     }
 
+    const cellSemantics = isRadio.value
+    ? {
+        role: 'radio',
+        'aria-checked': selected,
+        selected: undefined,
+      }
+    : {
+        role: 'gridcell',
+        selected,
+      };
+
     return () => h(ButtonGridCell, {
       ...attrs,
       item: item.value,
@@ -127,6 +151,27 @@ export const ColorPickerGridCellBase = defineComponent({
       index: item.value?.index,
       class: classNames.value.colorCell,
       getClassNames: getColorPickerGridCellButtonClassNames,
+      onClick: (ev: MouseEvent) => {
+        props.onClick?.(ev, item.value)
+      },
+      onHover: (ev: MouseEvent) => {
+        props.onHover?.(ev, item.value)
+      },
+      onFocus: (ev: FocusEvent) => {
+        props.onFocus?.(ev, item.value)
+      },
+      onMouseEnter: (ev: MouseEvent) => {
+        props.onMouseEnter?.(ev, item.value)
+      },
+      onMouseMove: (ev: MouseEvent) => {
+        props.onMouseMove?.(ev, item.value)
+      },
+      onMouseLeave: (ev: MouseEvent) => {
+        props.onMouseLeave?.(ev, item.value)
+      },
+      onKeyDown: (ev: KeyboardEvent) => {
+        props.onKeyDown?.(ev, item.value)
+      },
     }, {
       default: onRenderColorOption,
     })

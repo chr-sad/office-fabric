@@ -1,6 +1,6 @@
 import { computed, defineComponent, h, toRefs } from 'vue'
 import { classNamesFunction } from '@fluentui-vue/utilities'
-import { makeStylingProps, toMatrix } from '..'
+import { FocusZone, makeStylingProps, toMatrix } from '..'
 import type { IButtonGridStyleProps, IButtonGridStyles } from './ButtonGrid.types'
 
 const getClassNames = classNamesFunction<IButtonGridStyleProps, IButtonGridStyles>()
@@ -51,7 +51,7 @@ export const ButtonGridBase = defineComponent({
 
     return () => doNotContainWithinFocusZone.value
       ? renderContent()
-      : h('div', { // TODO replace with FocusZone
+      : h(FocusZone, {
         isCircularNavigation: shouldFocusCircularNavigate.value,
         className: classNames.value.focusedContainer,
       }, renderContent())

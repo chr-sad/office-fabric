@@ -125,6 +125,41 @@ export const BaseButton = defineComponent({
           showMenu.value = !showMenu.value
           props.onClick?.(ev)
         },
+        onKeydown: (ev) => {
+          if (disabled.value)
+            return
+          props.onKeyDown?.(ev)
+        },
+        onKeyup: (ev) => {
+          if (disabled.value)
+            return
+          props.onKeyUp?.(ev)
+        },
+        onMouseenter: (ev) => {
+          if (disabled.value)
+            return
+          props.onMouseEnter?.(ev)
+        },
+        onMousemove: (ev) => {
+          if (disabled.value)
+            return
+          props.onMouseMove?.(ev)
+        },
+        onMouseleave: (ev) => {
+          if (disabled.value)
+            return
+          props.onMouseLeave?.(ev)
+        },
+        onFocus: (ev) => {
+          if (disabled.value)
+            return
+          props.onFocus?.(ev)
+        },
+        onBlur: (ev) => {
+          if (disabled.value)
+            return
+          props.onBlur?.(ev)
+        },
         ...to.value && {
           href: disabled.value ? undefined : href.value,
           to: disabled.value ? undefined : to.value,

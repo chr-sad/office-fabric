@@ -15,6 +15,13 @@ export function useBaseButtonProps() {
 
     href: { type: String, default: undefined },
     onClick: { type: Function, default: undefined },
+    onKeyDown: { type: Function, default: undefined },
+    onKeyUp: { type: Function, default: undefined },
+    onMouseEnter: { type: Function, default: undefined },
+    onMouseMove: { type: Function, default: undefined },
+    onMouseLeave: { type: Function, default: undefined },
+    onFocus: { type: Function, default: undefined },
+    onBlur: { type: Function, default: undefined },
 
   }
 }
